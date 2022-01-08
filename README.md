@@ -11,10 +11,12 @@ ConsoleLog is a simple library for writing color-coded logs to the console.
 ## Demo
 
 ```java
-
+// Import.
 import com.umarabdul.consolelog.ConsoleLog;
+import com.umarabdul.consolelog.Color;
 
-ConsoleLog log = new ConsoleLog("MyAmazingProgram");
+// Create a console logger with color-coding of
+ConsoleLog log = new ConsoleLog("MyAmazingProgram", Color.YELLOW, Color.RED);
 log.writeStatus("Starting program....");
 log.writeWarning("We may be having some issues...");
 log.writeError("We definitely have some issues!!!");
