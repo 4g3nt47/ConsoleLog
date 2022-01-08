@@ -1,7 +1,8 @@
 package com.umarabdul.consolelog;
 
-import java.util.HashMap;
-import com.umarabdul.jbot.time.Time;
+import java.util.*;
+import java.time.*;
+import java.time.format.*;
 
 /**
 * A simple class for writing color-coded console logs by other programs.
@@ -34,12 +35,18 @@ public class ConsoleLog{
     colors.put("white", "\u001B[37m");
   }
 
+  private String getTime(){
+
+    LocalDateTime dobj = LocalDateTime.now();
+    return dobj.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+  }
+
   /**
   * Write some status output to console.
   * @param output Status message to write.
   */
   public void writeStatus(String output){
-    System.out.println("[" + colors.get("green") + Time.getInstance().getTime() + colors.get("default") + "] " + colors.get("green") + sender + colors.get("default") + ": " + output);
+    System.out.println("[" + colors.get("green") + getTime() + colors.get("default") + "] " + colors.get("green") + sender + colors.get("default") + ": " + output);
   }
 
   /**
@@ -47,7 +54,7 @@ public class ConsoleLog{
   * @param output Warning message to write.
   */
   public void writeWarning(String output){
-    System.out.println("[" + colors.get("yellow") + Time.getInstance().getTime() + colors.get("default") + "] " + colors.get("yellow") + sender + colors.get("default") + ": " + output);
+    System.out.println("[" + colors.get("yellow") + getTime() + colors.get("default") + "] " + colors.get("yellow") + sender + colors.get("default") + ": " + output);
   }
 
   /**
@@ -55,6 +62,6 @@ public class ConsoleLog{
   * @param output Error message to write.
   */
   public void writeError(String output){
-    System.out.println("[" + colors.get("red") + Time.getInstance().getTime() + colors.get("default") + "] " + colors.get("red") + sender + colors.get("default") + ": " + output);
+    System.out.println("[" + colors.get("red") + getTime() + colors.get("default") + "] " + colors.get("red") + sender + colors.get("default") + ": " + output);
   }
 }
