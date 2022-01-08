@@ -14,28 +14,44 @@ import java.time.format.*;
 public class ConsoleLog{
 
   private String sender = null;
-  private HashMap<String, String> colors = null;
+  private HashMap<Color, String> colors = null;
+  private Color errorColor;
+  private Color warningColor;
 
   /**
-  * Constructor.
-  * @param sender Name of the program or class generating the logs.
-  */
+   * Default constructor. Sets color-coding to yellow (warning) and red (error).
+   * @param sender Name of the program or class generating the logs.
+   */
   public ConsoleLog(String sender){
-
-    this.sender = sender;
-    colors = new HashMap<String, String>();
-    colors.put("default", "\u001B[0m");
-    colors.put("black", "\u001B[30m");
-    colors.put("red", "\u001B[31m");
-    colors.put("green", "\u001B[32m");
-    colors.put("yellow", "\u001B[33m");
-    colors.put("blue", "\u001B[34m");
-    colors.put("purple", "\u001B[35m");
-    colors.put("cyan", "\u001B[36m");
-    colors.put("white", "\u001B[37m");
+    this(sender, Color.YELLOW, Color.RED);
   }
 
-  private String getTime(){
+  /**
+  * Standard constructor.
+  * @param sender Name of the program or class generating the logs.
+  */
+  public ConsoleLog(String sender, Color warningColor, Color errorColor){
+
+    this.sender = sender;
+    this.warningColor = warningColor;
+    this.errorColor = errorColor;
+    colors = new HashMap<Color, String>();
+    colors.put(Color.DEFAULT, "\u001B[0m");
+    colors.put(Color.BLACK, "\u001B[30m");
+    colors.put(Color.RED, "\u001B[31m");
+    colors.put(Color.GREEN, "\u001B[32m");
+    colors.put(Color.YELLOW, "\u001B[33m");
+    colors.put(Color.BLUE, "\u001B[34m");
+    colors.put(Color.PURPLE, "\u001B[35m");
+    colors.put(Color.CYAN, "\u001B[36m");
+    colors.put(Color.WHITE, "\u001B[37m");
+  }
+
+  /**
+   * Get a formatted string of current time.
+   * @return Current time, in hour:minute:seconds format.
+   */
+  public String getTime(){
 
     LocalDateTime dobj = LocalDateTime.now();
     return dobj.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
@@ -46,7 +62,7 @@ public class ConsoleLog{
   * @param output Status message to write.
   */
   public void writeStatus(String output){
-    System.out.println("[" + colors.get("green") + getTime() + colors.get("default") + "] " + colors.get("green") + sender + colors.get("default") + ": " + output);
+    System.out.println("[" + colors.get(Color.GREEN) + getTime() + colors.get(Color.DEFAULT) + "] " + colors.get(Color.GREEN) + sender + colors.get(Color.DEFAULT) + ": " + output);
   }
 
   /**
@@ -54,7 +70,7 @@ public class ConsoleLog{
   * @param output Warning message to write.
   */
   public void writeWarning(String output){
-    System.out.println("[" + colors.get("yellow") + getTime() + colors.get("default") + "] " + colors.get("yellow") + sender + colors.get("default") + ": " + output);
+    System.out.println("[" + colors.get(warningColor) + getTime() + colors.get(Color.DEFAULT) + "] " + colors.get(warningColor) + sender + colors.get(Color.DEFAULT) + ": " + output);
   }
 
   /**
@@ -62,6 +78,6 @@ public class ConsoleLog{
   * @param output Error message to write.
   */
   public void writeError(String output){
-    System.out.println("[" + colors.get("red") + getTime() + colors.get("default") + "] " + colors.get("red") + sender + colors.get("default") + ": " + output);
+    System.out.println("[" + colors.get(errorColor) + getTime() + colors.get(Color.DEFAULT) + "] " + colors.get(errorColor) + sender + colors.get(Color.DEFAULT) + ": " + output);
   }
 }
