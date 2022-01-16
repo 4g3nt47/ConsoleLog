@@ -4,7 +4,7 @@ ConsoleLog is a simple library for writing color-coded logs to the console.
 
 ## Build
 
-- `$ git clone https://github.com/UmarAbdul01/ConsoleLog.git`
+- `$ git clone https://github.com/4g3nt47/ConsoleLog.git`
 - `$ cd ConsoleLog`
 - `$ ant jar`
 
